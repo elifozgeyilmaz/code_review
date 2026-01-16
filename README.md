@@ -1,4 +1,4 @@
-````markdown
+
 # AI Code Review Assignment – Eskalate
 
 This repository contains the **AI Code Review Assignment** for candidates applying to the **AI Training Software Engineer** role at **Eskalate**.
@@ -12,9 +12,9 @@ You should **clone this repository**, complete the tasks locally, and then push 
 ### Step 1: Clone the Repository
 Clone this repository to your local machine:
 
-```bash
+bash
 git clone https://github.com/MoeYasir/ai-code-review-assignment-template
-````
+
 
 ---
 
