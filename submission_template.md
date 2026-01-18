@@ -39,7 +39,7 @@ See `correct_task1.py`
  ### Testing Considerations
 If you were to test this function, what areas or scenarios would you focus on, and why?
 - I would check by inputting negative amount of order and give a data typefor order amount which is not convertible to any integral data type.
-- I also send non tuple data type as a parameter.
+- I also send non dictionary data type as a parameter.
 
 ## 3) Explanation Review & Rewrite
 ### AI-generated explanation (original)
@@ -56,8 +56,13 @@ If you were to test this function, what areas or scenarios would you focus on, a
 - Justification:
 - Confidence & unknowns:
 
---- Request Changes, it does not consider an important issue which leads to mathematically wrong result. However it is not necessary to design whole code from scratch.
+- It does not consider an important issue which leads to mathematically wrong result. However it is not necessary to design whole code from scratch.
 It does not specify what to do about negative amounts. I assume that it is an error input.
+Decision: Request Changes
+
+Justification: The denominator is incorrect (divides by total orders instead of non-cancelled orders) and the function can raise errors for empty input or missing keys.
+
+Confidence & unknowns: High confidence in the bug. Unknown: whether negative amounts (refunds) should be included; behavior for empty/all-cancelled input should be specified.
 
 
 # Task 2 — Count Valid Emails
@@ -76,7 +81,7 @@ It does not specify what to do about negative amounts. I assume that it is an er
 ### Summary of changes
 - check whether given input is list , and its elements are strings
 if it is a string we need to get rid of starting and ending spaces,
-also according to all email address conventions, string should contains exactly one '@' character, not more or less, and
+also using a simplified, pragmatic email format validation, string should contains exactly one '@' character, not more or less, and
 we check the email address by comparing with a valid address regex.
 
 ### Corrected code
@@ -126,6 +131,11 @@ Whitespace handling: " a@b.com " should be treated as valid after trimming.
 - Confidence & unknowns:
 
 --- The issues are correctable with additional validation and do not require a complete redesign, it lacks of important detail to check whether the string is suitable for the email conventions or not.
+Decision: Request Changes
+
+Justification: The original function is overly permissive and can raise TypeError for non-string inputs; adding minimal validation fixes correctness and safety without redesign.
+
+Confidence & unknowns: High confidence. Full RFC-compliant validation is intentionally out of scope; simplified rules are acceptable.
 
 # Task 3 — Aggregate Valid Measurements
 
@@ -179,7 +189,10 @@ Non-finite values if filtered: [1, float("nan"), 2] → should return 1.5 (if ig
 - Justification:
 - Confidence & unknowns:
 
-- I choose request change,
+-Decision: Request Changes
 -since it needs to divide the sum by number of data which is not none.
+Justification: The function divides by the total length including None, producing incorrect averages, and may raise exceptions for non-numeric inputs.
 
--High confidence in the bug. The only open decision is the desired policy for NaN/inf and the expected return value when no valid measurements exist (None vs 0.0), which should be specified.
+Confidence & unknowns: High confidence in the bug. Unknown: desired policy for NaN/inf and expected return value when no valid measurements exist (None vs 0.0).
+
+
