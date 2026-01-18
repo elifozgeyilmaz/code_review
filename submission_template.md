@@ -13,7 +13,7 @@
 - it excludes the cancelled orders while suming the order amount, however the number of the orders for finding the average is done by dividing the sum of noncancelled orders by number of all orders, which leads to mathematical error.
 
 ### Edge cases & risks
-- If the input parameter is not a tuple or
+- If the input is not an iterable of order-like mappings (dicts), the function may fail or 
 amount is non-numeric data types (e.g., strings that cannot be converted to numbers) or,
 order amount is negative.
 -If an order is missing "status" or "amount", the function can raise KeyError.
@@ -57,7 +57,7 @@ If you were to test this function, what areas or scenarios would you focus on, a
 - Confidence & unknowns:
 
 --- Request Changes, it does not consider an important issue which leads to mathematically wrong result. However it is not necessary to design whole code from scratch.
-It does not specify what to do about negative amounts.
+It does not specify what to do about negative amounts. I assume that it is an error input.
 
 
 # Task 2 — Count Valid Emails
