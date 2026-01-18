@@ -29,7 +29,7 @@ Behavior for empty input or all-cancelled input is not documented.
 ## 2) Proposed Fixes / Improvements
 ### Summary of changes
 -  instead of dividing the sum of non-cancelled order amounts by number of all orders, I divide it by the number of noncancelled orders and,
-I check if the amount is integral type and larger than 0.
+I attempt to convert amounts to float, skip non-numeric values, and ignore amounts <= 0 .
 
 ### Corrected code
 See `correct_task1.py`
@@ -38,7 +38,7 @@ See `correct_task1.py`
 
  ### Testing Considerations
 If you were to test this function, what areas or scenarios would you focus on, and why?
-- I would check by inputting negative amount of order and give a data typefor order amount which is not convertible to any integral data type.
+- I would check by inputting negative amount of order and give a data typefor order amount which is not convertible to any numeric data type.
 - I also send non dictionary data type as a parameter.
 
 ## 3) Explanation Review & Rewrite
@@ -144,7 +144,7 @@ Confidence & unknowns: High confidence. Full RFC-compliant validation is intenti
 - it does not include none data types while suming the result, however it divides the sum by number of all values which also may include none data types.
 
 ### Edge cases & risks
-- if given parameter is not iterable, and includes non integral data types which cannot be sum.
+- if given parameter is not iterable, and includes non numeric data types which cannot be sum.
 
 ### Code quality / design issues
 - The variable name count is misleading because it represents total input length, not the number of valid measurements.
